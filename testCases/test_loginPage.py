@@ -1,8 +1,9 @@
 import pytest
 from pageObjects.Login import LoginPage
+from utilities.readProperties import readConfig
 
 class TestLogin:
-    baseURL = 'https://www.travelio.com/'
+    baseURL = readConfig.getApplicationURL()
 
     def setup_page(self, driver):
         driver.get(self.baseURL)
@@ -11,8 +12,13 @@ class TestLogin:
         act_title = driver.title
         return act_title
 
-    def test_TC_001_REGISTER_002(self, setup):
+    def test_TC_LOGIN_001(self, setup):
         self.driver = setup
         self.setup_page(self.driver)
         lp = LoginPage(self.driver)
         lp.success_login()
+    def test_TC_LOGIN_002(self, setup):
+        self.driver = setup
+        self.setup_page(self.driver)
+        lp = LoginPage(self.driver)
+        lp.verify_account_not_registered()
