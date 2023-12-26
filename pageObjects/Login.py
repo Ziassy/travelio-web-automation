@@ -1,10 +1,13 @@
 from selenium.webdriver.common.by import By
 from utilities.readProperties import readConfig
+from utilities.customLogger import LogGen
 import time
 
 class LoginPage:
 
     rc = readConfig
+
+    logger = LogGen.loggen()
 
     loginButton = 'loginBtn'
     emailTxt = 'login-email'
@@ -32,6 +35,7 @@ class LoginPage:
         time.sleep(1)
         self.driver.find_element(By.ID, self.passwordTxt).send_keys(password)
         self.driver.find_element(By.ID, self.loginModalButton).click()
+        self.logger.info('************* Done input data login ***************')
 
     def success_login(self):
         self.data_login(self.rc.getEmail(), self.rc.getPassword())
@@ -40,10 +44,12 @@ class LoginPage:
         daftar_property = self.driver.find_element(By.XPATH, self.daftarPropertyButton).is_displayed()
         if user_option and daftar_property == True:
             self.driver.save_screenshot(".\\Screenshots\\success\\LOGIN-001.png")
+            self.logger.info('************* capture success login LOGIN-001  ***************')
             self.driver.close()
             assert True
         else:
             self.driver.save_screenshot(".\\Screenshots\\failed\\LOGIN-001.png")
+            self.logger.info('************* capture failed login LOGIN-001  ***************')
             self.driver.close()
             assert False
 
@@ -54,10 +60,12 @@ class LoginPage:
         if error_message == self.messageAccountNotRegistered:
             self.driver.save_screenshot(".\\Screenshots\\success\\LOGIN-002.png")
             self.driver.find_element(By.XPATH, self.buttonOkModalError).click()
+            self.logger.info('************* capture success verify_account_not_registered  ***************')
             self.driver.close()
             assert True
         else:
             self.driver.save_screenshot(".\\Screenshots\\failed\\LOGIN-002.png")
+            self.logger.info('************* capture fail verify_account_not_registered  ***************')
             self.driver.close()
             assert False
 
