@@ -60,12 +60,12 @@ class LoginPage:
         if error_message == self.messageAccountNotRegistered:
             self.driver.save_screenshot(".\\Screenshots\\success\\LOGIN-002.png")
             self.driver.find_element(By.XPATH, self.buttonOkModalError).click()
-            self.logger.info('************* capture success verify_account_not_registered  ***************')
+            self.logger.info('************* capture success verify_account_not_registered LOGIN-002  ***************')
             self.driver.close()
             assert True
         else:
             self.driver.save_screenshot(".\\Screenshots\\failed\\LOGIN-002.png")
-            self.logger.info('************* capture fail verify_account_not_registered  ***************')
+            self.logger.info('************* capture fail verify_account_not_registered LOGIN-002 ***************')
             self.driver.close()
             assert False
 
