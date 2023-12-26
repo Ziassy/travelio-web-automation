@@ -1,0 +1,2 @@
+- Run this for install all package Pip install requirements.txt
+- Running pytest -v --capture=tee-sys --html=Reports\report.html testCases
